@@ -19,7 +19,3 @@ def calculate_remainder(dict_of_feature_cardinalities,dict_of_target_cardinaliti
 	for value in dict_of_feature_cardinalities:
 		remainder = remainder + (dict_of_feature_cardinalities[value]/sum(dict_of_feature_cardinalities.values())) * (entropy(dict_of_target_cardinalities))
 	return -remainder
-
-feature = [True,False,True,False,False,True]
-target = ['a','a','b','b','a','b']
-print(calculate_remainder(get_cardinalities(feature), get_cardinalities(target)))
