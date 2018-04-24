@@ -15,7 +15,7 @@ def dqr_continuous(datas, continuous_names, number):
              'Std. Dev.'])
         for feature in continuous_names:
             count = datas[feature].count()
-            miss = number - datas[feature].count()
+            miss = count_missing(datas, feature) * 100 / number
             card = len(list(set(datas[feature])))
             min = datas[feature].min()
             fstQrt = datas[feature][first]
@@ -27,7 +27,7 @@ def dqr_continuous(datas, continuous_names, number):
             filewriter.writerow([feature, count, miss, card, min, fstQrt, mean, median, trdQrt, max, std])
 
 # Make csv file for categorical features.
-def dqr_categorical(datas, categorical_names):
+def dqr_categorical(datas, categorical_names, number):
     with open('./Data/B-DQR-CategoricalFeatures.csv', 'w', newline='') as csvfile:
         filewriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(
@@ -35,7 +35,7 @@ def dqr_categorical(datas, categorical_names):
              '2nd Mode (%)'])
         for feature in categorical_names:
             count = datas[feature].count()
-            miss = -count_missing(datas, feature) * 100 / count
+            miss = count_missing(datas, feature) * 100 / number
             card = count_cardinality(datas, feature)
             mode, mode_freq, second_mode, second_mode_freq = count_modes(datas, feature)
             mode_perc = (count - mode_freq) * 100 / count
@@ -105,7 +105,7 @@ def count_modes(datas, feature):
 def count_missing(datas, feature):
     count = 0
     for value in datas[feature]:
-        if value != " ?":
+        if value == " ?":
             count = count + 1
     return count
 

@@ -24,7 +24,7 @@ data = []
 # Make csv file for continuous features.
 dqr_continuous(datas, continuous_names, number)
 # Make csv file for categorical features.
-dqr_categorical(datas, categorical_names)
+dqr_categorical(datas, categorical_names, number)
 
 # Generate graphs (html files) for all continuous features.
 generate_graphs_for_continuous(datas, continuous_names)
