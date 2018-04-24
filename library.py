@@ -4,7 +4,7 @@ import plotly
 import plotly.graph_objs as go
 import numpy
 
-# define is category is continuoous or categorical
+# Order feature as continuous or categorical.
 def make_list_name(datas, names):
     continuous_names = []
     categorical_names = []
@@ -54,7 +54,7 @@ def dqr_categorical(datas, categorical_names):
             filewriter.writerow(
                 [feature, count, miss, card, mode, mode_freq, mode_perc, second_mode, second_mode_freq, second_mode_perc])
 
-
+# Generate graphs for continuous and categorical features.
 def generate_graphs(datas, names, continue_bool):
     for feature in names:
         unique = list(datas[feature])
@@ -79,49 +79,7 @@ def generate_graphs(datas, names, continue_bool):
         fig = go.Figure(data=chart, layout=layout)
         plotly.offline.plot(fig, filename="./Visualisations/"+feature+".html")
 
-
-# Generate graphs (html files) for all continuous features.
-def generate_graphs_for_continuous(datas, continuous_names):
-    for feature in continuous_names:
-        unique = list(datas[feature])
-        values = list()
-        for u in unique:
-            values.append(datas[feature].tolist().count(u))
-        if len(unique) >= 10:
-            # We create a histogram.
-            chart = [go.Histogram(
-                x = unique
-            )]
-        else:
-            # We create a bar plot.
-            chart = [go.Bar(
-                x = numpy.asarray(unique),
-                y = numpy.asarray(values)
-            )]
-        layout = go.Layout(
-            title=feature,
-        )
-
-        fig = go.Figure(data=chart, layout=layout)
-        plotly.offline.plot(fig, filename="./Visualisations/"+feature+".html")
-
-# Generate graphs (html files) for all categorical features.
-def generate_graphs_for_categorical_names(datas, categorical_names):
-    for feature in categorical_names:
-        unique = list(set(datas[feature]))
-        values = list()
-        for u in unique:
-            values.append(datas[feature].tolist().count(u))
-        chart = [go.Bar(
-            x = numpy.asarray(unique),
-            y = numpy.asarray(values)
-        )]
-        layout = go.Layout(
-            title=feature,
-        )
-        fig = go.Figure(data=chart, layout=layout)
-        plotly.offline.plot(fig, filename="./Visualisations/"+feature+".html")
-
+# Density per value.
 def get_cardinalities(datas):
     possible_values_with_cardinality = dict()
     for value in datas:
@@ -131,6 +89,7 @@ def get_cardinalities(datas):
             possible_values_with_cardinality[value]=1
     return possible_values_with_cardinality
 
+# Determine first mode & seconde mode of features.
 def count_modes(datas, feature):
     possible_values_with_cardinality = get_cardinalities(datas[feature])
     # Don't forget to import operator !
@@ -143,6 +102,7 @@ def count_modes(datas, feature):
     second_mode_freq = sorted_possible_values_with_cardinality[length - 2][1]
     return mode, mode_freq, second_mode, second_mode_freq
 
+# Count missing of features.
 def count_missing(datas, feature):
     count = 0
     for value in datas[feature]:
@@ -150,6 +110,7 @@ def count_missing(datas, feature):
             count = count + 1
     return count
 
+# Count possible values of each features.
 def count_cardinality(datas, feature):
     possible_values = list()
     for value in datas[feature]:

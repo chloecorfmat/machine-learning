@@ -16,11 +16,12 @@ datas = pandas.read_csv('./Data/DataSet.csv')
 number = datas.id.count()
 data = []
 
-# Define if name is continuous or categorical
+# Define if feature is continuous or categorical.
 continuous_names, categorical_names = make_list_name(datas, names)
 
 # Make csv file for continuous features.
 dqr_continuous(datas, continuous_names, number)
+
 # Make csv file for categorical features.
 dqr_categorical(datas, categorical_names)
 
