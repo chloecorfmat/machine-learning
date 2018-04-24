@@ -122,13 +122,17 @@ def generate_graphs_for_categorical_names(datas, categorical_names):
         fig = go.Figure(data=chart, layout=layout)
         plotly.offline.plot(fig, filename="./Visualisations/"+feature+".html")
 
-def count_modes(datas, feature):
+def get_cardinalities(datas):
     possible_values_with_cardinality = dict()
-    for value in datas[feature]:
+    for value in datas:
         if value in possible_values_with_cardinality.keys():
-            possible_values_with_cardinality[value] = possible_values_with_cardinality[value] + 1
+            possible_values_with_cardinality[value]=possible_values_with_cardinality[value]+1
         else:
-            possible_values_with_cardinality[value] = 1
+            possible_values_with_cardinality[value]=1
+    return possible_values_with_cardinality
+
+def count_modes(datas, feature):
+    possible_values_with_cardinality = get_cardinalities(datas[feature])
     # Don't forget to import operator !
     sorted_possible_values_with_cardinality = sorted(possible_values_with_cardinality.items(),
                                                      key=operator.itemgetter(1))
