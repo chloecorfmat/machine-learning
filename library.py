@@ -1,5 +1,7 @@
 import operator
 import csv
+import plotly
+import plotly.graph_objs as go
 
 # Make csv file for continous features.
 def dqr_continuous(datas, continuous_names, number):
