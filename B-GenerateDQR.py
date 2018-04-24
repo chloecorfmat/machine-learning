@@ -8,9 +8,9 @@ import os
 # Import custom functions.
 from library import *
 
-# Create directory for Virsualizations (html files).
-if not os.path.exists('Visualizations'):
-    os.makedirs('Visualizations')
+# Create directory for Virsualisations (html files).
+if not os.path.exists('Visualisations'):
+    os.makedirs('Visualisations')
 
 # TODO : Try to determine programmatically if continous or categorical.
 continuous_names = ['age', 'fnlwgt', 'education-num', 'capital-gain', 'capital-loss', 'hours-per-week']

@@ -64,7 +64,7 @@ def generate_graphs_for_continuous(datas, continuous_names):
         )
 
         fig = go.Figure(data=chart, layout=layout)
-        plotly.offline.plot(fig, filename="./Visualizations/"+feature+".html")
+        plotly.offline.plot(fig, filename="./Visualisations/"+feature+".html")
 
 # Generate graphs (html files) for all categorical features.
 def generate_graphs_for_categorical_names(datas, categorical_names):
@@ -81,7 +81,7 @@ def generate_graphs_for_categorical_names(datas, categorical_names):
             title=feature,
         )
         fig = go.Figure(data=chart, layout=layout)
-        plotly.offline.plot(fig, filename="./Visualizations/"+feature+".html")
+        plotly.offline.plot(fig, filename="./Visualisations/"+feature+".html")
 
 def count_modes(datas, feature):
     possible_values_with_cardinality = dict()
