@@ -27,8 +27,3 @@ dqr_categorical(datas, categorical_names)
 # Generate graphs (html files) for all continuous features.
 generate_graphs(datas, continuous_names, 1)
 generate_graphs(datas, categorical_names, 0)
-
-# Generate graphs (html files) for all continuous features.
-# generate_graphs_for_continuous(datas, continuous_names)
-# Generate graphs (html files) for all categorical features.
-# generate_graphs_for_categorical_names(datas, categorical_names)
